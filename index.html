@@ -52,30 +52,13 @@
 
 <body class="bg-dark">
   <main class="mx-4 bg-dark text-white overflow-x-scroll">
+    <!-- Input and Button Add Task -->
     <div class="d-flex flex-row juscon w-50 gap-3 my-4 ">
       <input class="input-group-text" type="text" id="inputAddTask">
       <button class="btn btn-success" id="addTask">Add task</button>
     </div>
-    <div class="d-flex flex-row flex-nowrap overflow-x-scroll gap-3">
-      <div class="card w-20em">
-        <div class="card-header bg-dark-subtle text-dark">
-          New task
-        </div>
-        <div class="card-body" id="bodyNewTask">
-          <!-- cards task -->
-          <div class="card bg-dark-subtle p-1 border-start text-dark my-2" id="card">
-            <!-- <div class="bg-danger"></div> -->
-            Exemple task
-            <div class="d-none" id="colorId">mostrando</div>
-          </div>
-          <div class="card bg-dark-subtle p-1 border-start text-dark my-2">
-            <!-- <div class="bg-danger"></div> -->
-            Exemple task
-          </div>
-        </div>
-      </div>
-      <div class="column"></div>
-    </div>
+    <!-- Input and Button A -->
+    <div class="d-flex flex-row flex-nowrap overflow-x-scroll gap-3" id="columnNewTask"></div>
   </main>
   <script src="index.js"></script>
 </body>
