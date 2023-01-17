@@ -1,15 +1,34 @@
 // Add Column
-let dataDB = {'column':0,'columns':{}}
-
+let dataDB = 
+[
+  {
+    id:0,
+    tag: 'New task',
+    task:
+      [
+        'New task one','New task two', 'New task three'
+      ]
+  },
+  {
+    id:1,
+    tag: 'Index One Task',
+    task:
+      [
+        'New task one','New task two', 'New task three'
+      ]
+  }
+]
 // let dataDB = new Array()
 let numberColumn = dataDB.column
 let btnaddColumn = document.getElementById('addColumn');
 let columnKanban = document.getElementById('columnKanban');
 
 btnaddColumn.addEventListener('click', function () {
-    dataDB.column++
-    setLocalSave(dataDB)
+    // dataDB.column++
+    // setLocalSave(dataDB)
     renderColumn()
+    
+
 })
 
 function setLocalSave(arrayJSON) {
@@ -19,13 +38,15 @@ function setLocalSave(arrayJSON) {
 
 function renderColumn() {
     console.log('Render Columns')
-    let arr = JSON.parse(getLocalSave())
-    
-        columnKanban.innerHTML += 
-       `
-       <div class="card w-20em">
-        <div class="card-header bg-dark-subtle text-dark">
-          New column
+    console.log(dataDB)
+
+    for (let i = 0; i < dataDB.length; i++) {
+      let index = i
+      columnKanban.innerHTML += 
+      `
+      <div class="card w-20em" id=${dataDB[i].id}>
+        <div class="card-header bg-dark-subtle text-dark d-flex align-items-center justify-content-between">
+          ${dataDB[i].tag} <button class="btn" onclick="removeCard(${index})" ><i class="bi bi-x-lg"></i></button>
         </div>
         <div class="card-body" id="bodyNewTask">
           <!-- cards task -->
@@ -36,10 +57,18 @@ function renderColumn() {
           </div>
         </div>
       </div>
+      `
+      
+    }
 
-       `
-}
+  }
 
 function getLocalSave() {
     return localStorage.getItem('dataDB')
+}
+
+function removeCard(index) {
+  dataDB.splice(index, 1)
+  columnKanban.innerHTML = '', // OR reload document DOM
+  renderColumn()
 }
