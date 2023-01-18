@@ -14,12 +14,19 @@ btnAddColumn.addEventListener('click', function () {
 })
 
 function addArray() {
-  let newArr = {tagLabel: "New task", task:[]}
+  let newArr = {tagLabel: "New column", task:[]}
   JSON.stringify(newArr)
   arr.push(newArr);
-  console.log(arr)
   saveLocalStorage(arr)
   
+}
+
+function change(index) {
+  let newLabel = document.getElementById(`label_${index}`).value;
+  columnKanban.innerHTML = '';
+  arr[index].tagLabel = newLabel
+  saveLocalStorage(arr)
+  renderColumn(arr)
 }
 
 function removeCard(index) {
@@ -39,7 +46,7 @@ function renderColumn(data) {
     `
     <div class="card w-20em" id=${index}>
         <div class="card-header bg-dark-subtle text-dark d-flex align-items-center justify-content-between">
-        <input class="border border-0 bg-transparent btn text-start" type="text" value="New Task" id="label_${index}">
+        <input class="border border-0 bg-transparent btn text-start" type="text" value="${tagLabel}" onchange="change(${index})" id="label_${index}">
         <button class="btn" onclick="removeCard(${index})" ><i class="bi bi-x-lg"></i></button>
         </div>
         <div class="card-body" id="bodyNewTask">
@@ -59,4 +66,3 @@ function saveLocalStorage(array) {
 function getLocalStorage() {
   return JSON.parse(localStorage.getItem('dataDB')) 
 }
-
