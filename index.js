@@ -14,14 +14,11 @@ btnAddColumn.addEventListener('click', function () {
   renderColumn(arr)
 })
 
-
-
 function addArray() {
-  let newArr = {tagLabel: "New column", task:[]}
+  let newArr = { tagLabel: "New column", task: [] }
   JSON.stringify(newArr)
   arr.push(newArr);
   saveLocalStorage(arr)
-  
 }
 
 function change(index) {
@@ -30,10 +27,6 @@ function change(index) {
   arr[index].tagLabel = newLabel
   saveLocalStorage(arr)
   renderColumn(arr)
-}
-
-function drag(index) {
-  
 }
 
 function removeCard(index) {
@@ -48,20 +41,21 @@ function renderColumn(data) {
   for (let i = 0; i < data.length; i++) {
     let index = i
     let tagLabel = data[i].tagLabel;
-    columnKanban.innerHTML += 
-    `
-    <div class="card w-20em" id="card" ondragenter="drag(${index})">
+    columnKanban.innerHTML +=
+      `
+    <div class="card w-20em" id="card">
         <div class="card-header bg-dark-subtle text-dark d-flex align-items-center justify-content-between">
         <input class="border border-0 bg-transparent btn text-start" type="text" value="${tagLabel}" onchange="change(${index})" id="label_${index}">
         <button class="btn" onclick="removeCard(${index})" ><i class="bi bi-x-lg"></i></button>
         </div>
         <div class="card-body" id="bodyNewTask">
           <!-- cards task -->
+          <input type="f" name="" id="addTaskDraggable">
           </div>
         </div>
       </div>
     `
-    
+
   }
 }
 
@@ -70,5 +64,5 @@ function saveLocalStorage(array) {
 }
 
 function getLocalStorage() {
-  return JSON.parse(localStorage.getItem('dataDB')) 
+  return JSON.parse(localStorage.getItem('dataDB'))
 }
