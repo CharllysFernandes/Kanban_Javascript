@@ -1,5 +1,6 @@
 let btnAddColumn = document.getElementById('addColumn');
 let columnKanban = document.getElementById('columnKanban');
+let cardTask = document.getElementById('cardTask')
 let arr = []
 
 if (getLocalStorage() !== []) {
@@ -35,7 +36,6 @@ function removeCard(index) {
   saveLocalStorage(arr)
   renderColumn(arr)
 }
-
 
 function renderColumn(data) {
   columnKanban.innerHTML = '';

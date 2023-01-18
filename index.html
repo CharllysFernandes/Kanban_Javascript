@@ -53,21 +53,25 @@
       border-left: 2px solid red;
       content: "Add new column";
     }
+    #cardTask {
+      cursor: grab;
+    }
   </style>
 </head>
 
 <body class="bg-dark">
   <main class="mx-4 bg-dark text-white overflow-x-scroll" id="main">
     <!-- Input and Button Add Task -->
-    <div class="d-flex flex-row w-50 gap-3 my-4 ">
+    <div class="d-flex flex-row w-100 gap-3 my-4" id="navbar">
       <input class="input-group-text" type="text" id="inputAddTask">
       <button class="btn btn-success" id="addTask">Add task</button>
       <button class="btn btn-outline-success" id="addColumn">Add column</button>
+      <div class="card bg-dark-subtle px-3 border-start text-dark my-2" id="cardTask" draggable="true">
+        task exemple
+      </div>
     </div>
     <!-- Input and Button A -->
-    <div class="d-flex flex-row flex-nowrap overflow-x-scroll gap-3" id="columnKanban">
-      <input class="border border-0 bg-transparent btn text-start" type="text" value="New Task" onchange="change()">
-    </div>
+    <div class="d-flex flex-row flex-nowrap overflow-x-scroll gap-3" id="columnKanban"></div>
   </main>
   <script src="index.js"></script>
 </body>
