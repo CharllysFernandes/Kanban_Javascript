@@ -9,7 +9,6 @@ if (getLocalStorage() !== []) {
 }
 
 btnAddColumn.addEventListener('click', function () {
-  console.log('Create column');
   addArray()
   renderColumn(arr)
 })
@@ -27,6 +26,10 @@ function change(index) {
   arr[index].tagLabel = newLabel
   saveLocalStorage(arr)
   renderColumn(arr)
+}
+
+function changeTask(task) {
+  
 }
 
 function removeCard(index) {
@@ -48,9 +51,9 @@ function renderColumn(data) {
         <input class="border border-0 bg-transparent btn text-start" type="text" value="${tagLabel}" onchange="change(${index})" id="label_${index}">
         <button class="btn" onclick="removeCard(${index})" ><i class="bi bi-x-lg"></i></button>
         </div>
-        <div class="card-body" id="bodyNewTask">
+        <div class="card-body" id="target">
           <!-- cards task -->
-          <input type="f" name="" id="addTaskDraggable">
+          
           </div>
         </div>
       </div>
@@ -66,3 +69,24 @@ function saveLocalStorage(array) {
 function getLocalStorage() {
   return JSON.parse(localStorage.getItem('dataDB'))
 }
+
+const source = document.getElementById('source');
+source.addEventListener('dragstart', (e) => {
+  e.dataTransfer.clearData();
+  e.dataTransfer.setData('text/plain', e.target.id)
+
+  const target = document.querySelector('#target');
+  target.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  })
+
+  target.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData('text');
+    const source = document.getElementById(data);
+    e.target.appendChild(source)
+    console.log(source.innerHTML)
+    console.log(arr);
+    arr[0].task.push(source.innerText)
+  })
+})
