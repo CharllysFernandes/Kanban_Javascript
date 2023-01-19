@@ -1,7 +1,7 @@
 let btnAddColumn = document.getElementById('addColumn');
 let columnKanban = document.getElementById('columnKanban');
 let cardTask = document.getElementById('cardTask')
-let arr = []
+let arr = new Array()
 
 if (getLocalStorage() !== []) {
   arr = getLocalStorage();
@@ -39,11 +39,11 @@ function removeCard(index) {
   renderColumn(arr)
 }
 
-function renderColumn(data) {
+function renderColumn(array) {
   columnKanban.innerHTML = '';
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     let index = i
-    let tagLabel = data[i].tagLabel;
+    let tagLabel = array[i].tagLabel;
     columnKanban.innerHTML +=
       `
     <div class="card w-20em" id="card">
