@@ -3,7 +3,7 @@ let columnKanban = document.getElementById('columnKanban');
 let cardTask = document.getElementById('cardTask')
 let arr = new Array()
 
-if (getLocalStorage() !== []) {
+if (getLocalStorage().length > 0) {
   arr = getLocalStorage();
   renderColumn(arr);
 }
