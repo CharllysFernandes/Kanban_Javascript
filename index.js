@@ -1,92 +1,71 @@
-let btnAddColumn = document.getElementById('addColumn');
-let columnKanban = document.getElementById('columnKanban');
-let cardTask = document.getElementById('cardTask')
-let arr = new Array()
+let database = new Array()
+let dashboard = document.getElementById('dashboard');
 
-if (getLocalStorage() !== null) {
-  arr = getLocalStorage();
-  renderColumn(arr);
+database = getDatabase();
+
+if (database === null  ) {
+  database = []
+}else{
+  render(database)
 }
 
-btnAddColumn.addEventListener('click', function () {
-  addArray()
-  renderColumn(arr)
-})
+function addCustomCard() {
+  let customCard = {label:'Unspecified stage', task:[]}
+  database.push(customCard)
+  render(database)
+}
 
-function addArray() {
-  let newArr = { tagLabel: "New column", task: [] }
-  JSON.stringify(newArr)
-  arr.push(newArr);
-  saveLocalStorage(arr)
+function addTask() {
+  database[0].task.push('New task empty')
+  saveDatabase(database)
+}
+
+function remove(index) {
+  database.splice(index, 1)
+  render(database)
 }
 
 function change(index) {
-  let newLabel = document.getElementById(`label_${index}`).value;
-  columnKanban.innerHTML = '';
-  arr[index].tagLabel = newLabel
-  saveLocalStorage(arr)
-  renderColumn(arr)
-}
-
-function changeTask(task) {
-  
-}
-
-function removeCard(index) {
-  columnKanban.innerHTML = '';
-  arr.splice(index, 1)
-  saveLocalStorage(arr)
-  renderColumn(arr)
-}
-
-function renderColumn(data) {
-  columnKanban.innerHTML = '';
-  for (let i = 0; i < data.length; i++) {
-    let index = i
-    let tagLabel = data[i].tagLabel;
-    columnKanban.innerHTML +=
-      `
-    <div class="card w-20em" id="card">
-        <div class="card-header bg-dark-subtle text-dark d-flex align-items-center justify-content-between">
-        <input class="border border-0 bg-transparent btn text-start" type="text" value="${tagLabel}" onchange="change(${index})" id="label_${index}">
-        <button class="btn" onclick="removeCard(${index})" ><i class="bi bi-x-lg"></i></button>
-        </div>
-        <div class="card-body" id="target">
-          <!-- cards task -->
-          
-          </div>
-        </div>
-      </div>
-    `
-
+  if (index === 0) {
+    alert('Card cannot be edited.')
+    render(database)
+  } else {
+    let valueInput = document.getElementById(`label_${index}`).value;
+    database[index].label = valueInput
+    render(database)
+    
   }
 }
 
-function saveLocalStorage(array) {
-  localStorage.setItem('dataDB', JSON.stringify(array))
+function render(database) {
+  saveDatabase(database)
+  dashboard.innerHTML = '';
+  for (let i = 0; i < database.length; i++) {
+    let title = database[i].label
+    dashboard.innerHTML += 
+    `
+    <div class="rounded rounded-3 customCard p-3 me-4" id="customCard_${i}">
+        <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="title-column">
+              <input type="text" class="border-0 bg-transparent" onchange="change(${i})" id='label_${i}' value="${title}">
+              <span class="title-number rounded rounded-2 p-1">
+              0
+              </span>
+            </div>
+          <button class="btn btn-add-circle rounded-circle text-center m-0 p-0" onclick="remove(${i})"><i class="bi-x fs-5"></i></button>
+        </div>      
+      </div>
+    `
+    
+  }
+
+
 }
 
-function getLocalStorage() {
-  return JSON.parse(localStorage.getItem('dataDB'))
+function saveDatabase(database) {
+  localStorage.setItem('database', JSON.stringify(database))
 }
 
-const source = document.getElementById('source');
-source.addEventListener('dragstart', (e) => {
-  e.dataTransfer.clearData();
-  e.dataTransfer.setData('text/plain', e.target.id)
-
-  const target = document.querySelector('#target');
-  target.addEventListener('dragover', (e) => {
-    e.preventDefault();
-  })
-
-  target.addEventListener('drop', (e) => {
-    e.preventDefault();
-    const data = e.dataTransfer.getData('text');
-    const source = document.getElementById(data);
-    e.target.appendChild(source)
-    console.log(source.innerHTML)
-    console.log(arr);
-    arr[0].task.push(source.innerText)
-  })
-})
+function getDatabase() {
+  return JSON.parse(localStorage.getItem('database'))
+}

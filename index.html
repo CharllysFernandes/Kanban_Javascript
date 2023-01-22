@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -9,83 +9,90 @@
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-  <!-- Bootstrap -->
 
   <!-- Bootstrap icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-  <!-- Bootstrap icons -->
 
-  <!-- PopperJS -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
-    crossorigin="anonymous"></script>
-  <!-- PopperJS -->
-  
-
-  
-
-  <title>Kanban Javascript</title>
   <style>
-    body {
+    body main {
       height: 100vh;
       width: max-content;
-      min-width: 100vw;
     }
 
-    .border-start {
-      border-left: red 3px solid !important;
-    }
-
-    .w-20em {
+    .customCard {
+      background-color: #f0f3fa;
       width: 20em;
-      /* height: auto; */
+
     }
 
-    .column {
-      border-left: 1px solid lavender;
-      height: auto;
+    .title-column input,span {
+      color: #787b8c;
+
     }
 
-    .column:hover {
-      border-left: 2px solid red;
-      content: "Add new column";
+    .title-number {
+      background-color: #dee1e8;
     }
-    #cardTask {
-      cursor: grab;
+
+    .btn-add-circle {
+      background-color: #c0d6fa;
+      width: 32px;
+      height: 32px;
+      color: #206be3;
+    }
+
+    .custom-card-task {
+      background-color: #fff;
+    }
+
+    .custom-card-task  {
+      color: #12141c;
+    }
+
+    .custom-card-task p {
+      color: #494c57;
+    }
+
+    .description {
+      color: #a5acc3;
+    }
+    .btn2{
+      background-color: #d7dde8;
+      color: #494c57;
+
     }
   </style>
+
+  <title>Kanban - Task Board</title>
 </head>
 
-<body class="bg-black">
-  <main class="mx-4 bg-dark text-white overflow-x-scroll" id="main">
-    <!-- Input and Button Add Task -->
-    <div class="d-flex flex-row w-100 gap-3 my-4" id="navbar">
-      <input class="input-group-text" type="text" id="inputAddTask">
-      <button class="btn btn-success" id="addTask">Add task</button>
-      <button class="btn btn-outline-success" id="addColumn">Add column</button>
-      <div class="card bg-dark-subtle px-3 border-start text-dark my-2" id="source" draggable="true">
-        task exemple
-      </div>
+<body class="container-fluid">
+  <!-- Navbar -->
+  <nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Task Board</a>
+      <button class="btn text-success" onclick="addCustomCard()">
+        <i class="bi-card-heading"></i>
+        Custom Card
+      </button>
+      <button class="btn btn-outline-success" onclick="addTask()">
+        <i class="bi-plus fs-5"></i>
+        Add Task
+      </button>
     </div>
-    <!-- Input and Button A -->
-    <div class="d-flex flex-row flex-nowrap overflow-x-scroll gap-3" id="columnKanban">
+  </nav>
+  <!-- Navbar -->
 
-      <div class="bg-dark">
-        <h1 class="text-white">dfasdfa</h1>
-      </div>
-
+  <main class="p-2 pt-5 mt-4">
+  
+    <div class="d-flex flex-row" id="dashboard">
+      
+      
     </div>
+
   </main>
-  <script src="index.js"></script>
-  <script>
-    
-  </script>
+
+  <script src="./index.js"></script>
 </body>
 
 </html>
