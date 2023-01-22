@@ -19,12 +19,12 @@ function addCustomCard() {
 }
 
 function addTask() {
-
-  if (database === []) {
-    console.error('database === []');
+  if (database < 1) {
+    console.error('Database empty');
+    alert("Add one column first!")
   }
-
-  database[0].task.push('New task empty')
+  let newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
+  database[0].task.push(newEmptyTask)
   saveDatabase(database)
   renderTask(database)
 }
@@ -32,6 +32,7 @@ function addTask() {
 function remove(index) {
   database.splice(index, 1)
   render(database)
+  renderTask(database)
 }
 
 function change(index) {
@@ -50,6 +51,9 @@ function renderTask(database) {
   console.log('Render task');
   let columnTask = document.getElementById('columnTask_0')
   let arrayTask = database[0].task
+
+  let label = arrayTask[0].label
+  let description = arrayTask[0].description
   console.log(arrayTask);
 
   columnTask.innerHTML = '';
@@ -58,14 +62,14 @@ function renderTask(database) {
       `
     <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2">
       <h2 class="fs-6 fw-bold">
-        ${arrayTask[i]}
+        ${label}
       </h2>
       <div class="description">
         <i class="bi bi-file-earmark-text-fill small"></i>
         <span class="text-uppercase fw-bold small">description</span>
       </div>
       <p class="m-0 py-1">
-        <input type="text" class="border-0 rounded-0 " value="Add description ...">
+        <input type="text" class="border-0 rounded-0 " value="${description}">
       </p>
     </div>
     `
