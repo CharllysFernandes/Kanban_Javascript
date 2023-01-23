@@ -59,7 +59,7 @@ function renderTask(database) {
 
   if (arrayTask.length > 0 ) {
     var label = arrayTask[0].label
-    let description = arrayTask[0].description
+    var description = arrayTask[0].description
   }
 
   console.log(arrayTask);
