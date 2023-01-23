@@ -6,15 +6,18 @@ database = getDatabase();
 if (database === null) {
   database = []
 } else {
-  render(database)
+  render()
+}
+
+function render() {
+  renderColumn(database)
   renderTask(database)
 }
 
 function addCustomCard() {
   let customCard = { label: 'Unspecified stage', task: [] }
   database.push(customCard)
-  render(database)
-  renderTask(database)
+  render()
 
 }
 
@@ -26,13 +29,13 @@ function addTask() {
   let newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
   database[0].task.push(newEmptyTask)
   saveDatabase(database)
-  renderTask(database)
+  // renderTask(database)
+  window.location.reload()
 }
 
 function remove(index) {
   database.splice(index, 1)
-  render(database)
-  renderTask(database)
+  render()
 }
 
 function change(index) {
@@ -52,8 +55,13 @@ function renderTask(database) {
   let columnTask = document.getElementById('columnTask_0')
   let arrayTask = database[0].task
 
-  let label = arrayTask[0].label
-  let description = arrayTask[0].description
+  // Javascript Hoisting
+
+  if (arrayTask.length > 0 ) {
+    var label = arrayTask[0].label
+    let description = arrayTask[0].description
+  }
+
   console.log(arrayTask);
 
   columnTask.innerHTML = '';
@@ -76,8 +84,13 @@ function renderTask(database) {
   }
 }
 
-function render(database) {
+function renderColumn(database) {
   saveDatabase(database)
+  console.log(database);
+  if (database.length >= 1) {
+    var numberOfTask = database[0].task.length;
+    
+  }
   dashboard.innerHTML = '';
   for (let i = 0; i < database.length; i++) {
     let title = database[i].label
