@@ -1,5 +1,5 @@
+const dashboard = document.getElementById('dashboard');
 let database = new Array()
-let dashboard = document.getElementById('dashboard');
 
 database = getDatabase();
 
@@ -23,7 +23,6 @@ function addCustomCard() {
 
 function addTask() {
   if (database < 1) {
-    console.error('Database empty');
     alert("Add one column first!")
   }
   let newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
@@ -52,17 +51,20 @@ function change(index) {
 
 function renderTask(database) {
   console.log('Render task');
-  let columnTask = document.getElementById('columnTask_0')
-  let arrayTask = database[0].task
+  let columnTask = document.getElementById('columnTask_0');
+  
+  if (database.length !== 0) {
+    var arrayTask = database[0].task
+    if (arrayTask.length > 0 ) {
+      var label = arrayTask[0].label
+      var description = arrayTask[0].description
+    }
+    
+  }
 
   // Javascript Hoisting
 
-  if (arrayTask.length > 0 ) {
-    var label = arrayTask[0].label
-    var description = arrayTask[0].description
-  }
 
-  console.log(arrayTask);
 
   columnTask.innerHTML = '';
   for (let i = 0; i < arrayTask.length; i++) {
