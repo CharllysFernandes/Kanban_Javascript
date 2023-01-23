@@ -88,7 +88,7 @@ function render(database) {
             <div class="title-column">
               <input type="text" class="border-0 bg-transparent" onchange="change(${i})" id='label_${i}' value="${title}">
               <span class="title-number rounded rounded-2 p-1">
-              0
+              ${numberOfTask}
               </span>
             </div>
           <button class="btn btn-add-circle rounded-circle text-center m-0 p-0" onclick="remove(${i})"><i class="bi-x fs-5"></i></button>
