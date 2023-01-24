@@ -39,6 +39,7 @@ function changeLabelTask(index) {
 }
 
 function changeDescripTask(index) {
+  console.log(index)
   const input = document.getElementById(`inputDescript_${index}`).value;
   database[0].task[index].description = input
   render()
@@ -62,23 +63,15 @@ function change(index) {
 }
 
 function renderTask(database) {
-  let columnTask = document.getElementById('columnTask_0');
+  for (let i = 0; i < database.length; i++) {
+    let columnTask = document.getElementById(`columnTask_${i}`)
+    columnTask.innerHTML = "";
 
-  if (database.length !== 0) {
-    var arrayTask = database[0].task
-    if (arrayTask.length > 0) {
-    }
-    
-  }
-  
-  // Javascript Hoisting
-  
-  
-  
-  columnTask.innerHTML = '';
-  for (let i = 0; i < arrayTask.length; i++) {
-    var label = arrayTask[i].label
-    var description = arrayTask[i].description
+    let arrayTaskRender = database[i].task
+    for (let i = 0; i < arrayTaskRender.length; i++) {
+      let label = arrayTaskRender[i].label;
+      let description = arrayTaskRender[i].description;
+
     columnTask.innerHTML +=
       `
     <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2">
@@ -93,8 +86,44 @@ function renderTask(database) {
   </div>
     
     `
+
+    }
   }
+
+
+
+  // let columnTask = document.getElementById('columnTask_0');
+
+  // if (database.length !== 0) {
+  //   var arrayTask = database[0].task
+  // }
+  
+  // // Javascript Hoisting
+  
+  
+  
+  // columnTask.innerHTML = '';
+  // for (let i = 0; i < arrayTask.length; i++) {
+
+  //   var label = arrayTask[i].label
+  //   var description = arrayTask[i].description
+  //   columnTask.innerHTML +=
+  //     `
+  //   <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2">
+  //   <input type="text" class="fs-6 fw-bold border-0 rounded-0 w-100" value="${label}" onchange="changeLabelTask(${i})" id="inputLabel_${i}">
+  //   <div class="description">
+  //     <i class="bi bi-file-earmark-text-fill small"></i>
+  //     <span class="text-uppercase fw-bold small">description</span>
+  //   </div>
+  //   <p class="m-0 py-1">
+  //     <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${i})" id="inputDescript_${i}">
+  //   </p>
+  // </div>
+    
+  //   `
+  // }
 }
+
 
 function renderColumn(database) {
   saveDatabase(database)
