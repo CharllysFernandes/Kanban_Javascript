@@ -91,12 +91,10 @@ function renderTask(database) {
     <p class="m-0 py-1">
       <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
     </p>
-  </div>
-    
+  </div> 
     `
     }
   }
-
 }
 
 
