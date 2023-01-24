@@ -16,7 +16,7 @@ function render() {
 
 function addCustomCard() {
   let customCard = { label: 'Unspecified stage', task: [] }
-  database.push(customCard)
+  database.unshift(customCard)
   render()
 
 }
@@ -30,6 +30,18 @@ function addTask() {
   saveDatabase(database)
   // renderTask(database)
   window.location.reload()
+}
+
+function changeLabelTask(index) {
+  const inputValue = document.getElementById(`inputLabel_${index}`).value
+  database[0].task[index].label = inputValue
+  render()
+}
+
+function changeDescripTask(index) {
+  const input = document.getElementById(`inputDescript_${index}`).value;
+  database[0].task[index].description = input
+  render()
 }
 
 function remove(index) {
@@ -50,55 +62,53 @@ function change(index) {
 }
 
 function renderTask(database) {
-  console.log('Render task');
   let columnTask = document.getElementById('columnTask_0');
-  
+
   if (database.length !== 0) {
     var arrayTask = database[0].task
-    if (arrayTask.length > 0 ) {
-      var label = arrayTask[0].label
-      var description = arrayTask[0].description
+    if (arrayTask.length > 0) {
     }
     
   }
-
+  
   // Javascript Hoisting
-
-
-
+  
+  
+  
   columnTask.innerHTML = '';
   for (let i = 0; i < arrayTask.length; i++) {
+    var label = arrayTask[i].label
+    var description = arrayTask[i].description
     columnTask.innerHTML +=
       `
     <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2">
-      <h2 class="fs-6 fw-bold">
-        ${label}
-      </h2>
-      <div class="description">
-        <i class="bi bi-file-earmark-text-fill small"></i>
-        <span class="text-uppercase fw-bold small">description</span>
-      </div>
-      <p class="m-0 py-1">
-        <input type="text" class="border-0 rounded-0 " value="${description}">
-      </p>
+    <input type="text" class="fs-6 fw-bold border-0 rounded-0 w-100" value="${label}" onchange="changeLabelTask(${i})" id="inputLabel_${i}">
+    <div class="description">
+      <i class="bi bi-file-earmark-text-fill small"></i>
+      <span class="text-uppercase fw-bold small">description</span>
     </div>
+    <p class="m-0 py-1">
+      <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${i})" id="inputDescript_${i}">
+    </p>
+  </div>
+    
     `
   }
 }
 
 function renderColumn(database) {
   saveDatabase(database)
-  console.log(database);
-  if (database.length >= 1) {
-    var numberOfTask = database[0].task.length;
-    
-  }
+  // if (database.length >= 1) {
+  //   var numberOfTask = database[0].task.length;
+
+  // }
   dashboard.innerHTML = '';
   for (let i = 0; i < database.length; i++) {
     let title = database[i].label
+    let numberOfTask = database[i].task.length
     dashboard.innerHTML +=
       `
-    <div class="rounded rounded-3 customCard p-3 me-4" id="customCard_${i}">
+    <div class="rounded rounded-3 customCard p-3 me-4 h-100" id="customCard_${i}">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <div class="title-column">
               <input type="text" class="border-0 bg-transparent" onchange="change(${i})" id='label_${i}' value="${title}">
