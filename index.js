@@ -12,6 +12,7 @@ if (database === null) {
 function render() {
   renderColumn(database)
   renderTask(database)
+  
 }
 
 function addCustomCard() {
@@ -24,6 +25,7 @@ function addCustomCard() {
 function addTask() {
   if (database < 1) {
     alert("Add one column first!")
+
   }
 
   let newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
@@ -62,10 +64,12 @@ function changeLabelCard(index) {
 
 function saveDatabase(database) {
   localStorage.setItem('database', JSON.stringify(database))
+
 }
 
 function getDatabase() {
   return JSON.parse(localStorage.getItem('database'))
+
 }
 
 function renderTask(database) {
@@ -119,6 +123,5 @@ function renderColumn(database) {
         <div id="columnTask_${i}"></div>      
       </div>
     `
-
   }
 }
