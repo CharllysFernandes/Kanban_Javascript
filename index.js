@@ -5,14 +5,16 @@ database = getDatabase();
 
 if (database === null) {
   database = []
+
 } else {
   render()
+
 }
 
 function render() {
   renderColumn(database)
   renderTask(database)
-  
+
 }
 
 function addCustomCard() {
@@ -22,14 +24,14 @@ function addCustomCard() {
 
 }
 
-function addTask() {
+function addTask(indexDatabase) {
   if (database < 1) {
     alert("Add one column first!")
 
   }
 
   let newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
-  database[0].task.push(newEmptyTask)
+  database[indexDatabase].task.push(newEmptyTask)
   render();
 
 }
@@ -38,7 +40,7 @@ function changeLabelTask(indexDatabase, indexTask) {
   const inputValue = document.getElementById(`inputLabel_${indexDatabase}${indexTask}`).value
   database[indexDatabase].task[indexTask].label = inputValue
   render()
-  
+
 }
 
 function changeDescripTask(indexDatabase, indexTask) {
@@ -48,10 +50,26 @@ function changeDescripTask(indexDatabase, indexTask) {
 
 }
 
+function deleteTask(indexDatabase, indexTask) {
+  database[indexDatabase].task.splice(indexTask, 1);
+  render()
+
+}
+
 function remove(index) {
   // Add confirmation...
-  database.splice(index, 1)
-  render()
+  if (database[index].task.length > 0) {
+    if (window.confirm('Delete all saved tasks?')) {
+      database.splice(index, 1)
+      render()
+
+    }
+
+  } else {
+    database.splice(index, 1)
+    render()
+
+  }
 
 }
 
@@ -59,7 +77,7 @@ function changeLabelCard(index) {
   let valueInput = document.getElementById(`label_${index}`).value;
   database[index].label = valueInput
   render(database)
-  
+
 }
 
 function saveDatabase(database) {
@@ -75,7 +93,7 @@ function getDatabase() {
 function renderTask(database) {
   for (let i = 0; i < database.length; i++) {
     let indexDatabase = i
-    let columnTask = document.getElementById(`columnTask_${i}`)
+    var columnTask = document.getElementById(`columnTask_${indexDatabase}`)
     columnTask.innerHTML = "";
 
     let arrayTaskRender = database[i].task
@@ -84,20 +102,23 @@ function renderTask(database) {
       let label = arrayTaskRender[i].label;
       let description = arrayTaskRender[i].description;
 
-    columnTask.innerHTML +=
-      `
-    <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2">
-    <input type="text" class="fs-6 fw-bold border-0 rounded-0 w-100" value="${label}" onchange="changeLabelTask(${indexDatabase},${indexTask})" id="inputLabel_${indexDatabase}${indexTask}">
-    <div class="description">
-      <i class="bi bi-file-earmark-text-fill small"></i>
-      <span class="text-uppercase fw-bold small">description</span>
-    </div>
-    <p class="m-0 py-1">
-      <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
-    </p>
-  </div> 
+      columnTask.innerHTML +=
+        `
+      <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2">
+      <input type="text" class="fs-6 fw-bold border-0 rounded-0" value="${label}" onchange="changeLabelTask(${indexDatabase},${indexTask})" id="inputLabel_${indexDatabase}${indexTask}">
+      <button class="btn float-end" onclick="deleteTask(${indexDatabase},${indexTask})" ><i class="bi bi-x fs-6"></i></button>
+      <div class="description">
+        <i class="bi bi-file-earmark-text-fill small"></i>
+        <span class="text-uppercase fw-bold small">description</span>
+      </div>
+      <p class="m-0 py-1">
+        <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
+      </p>
+    </div> 
     `
     }
+    renderButtonAddTask(indexDatabase)
+
   }
 }
 
@@ -124,4 +145,32 @@ function renderColumn(database) {
       </div>
     `
   }
+  renderButtonAddColumn();
+
+}
+
+function renderButtonAddTask(indexDatabase) {
+  var columnTask = document.getElementById(`columnTask_${indexDatabase}`)
+
+  columnTask.innerHTML +=
+    `
+  <button class="btn w-100 shadow-sm bg-body-tertiary my-3" onclick="addTask(${indexDatabase})">
+          <i class="bi bi-plus"></i>
+        </button>
+  `
+
+}
+
+
+// Task to-do add collumn end 
+
+function renderButtonAddColumn() {
+  dashboard.innerHTML +=
+    `
+  <button class="btn btn-outline-success h-100" onclick="addCustomCard()">
+      <i class="bi bi-plus"></i>
+      Add card
+    </button>
+    `
+    
 }
