@@ -19,7 +19,7 @@ function render() {
 
 function addCustomCard() {
   let customCard = { label: 'Unspecified stage', task: [] }
-  database.unshift(customCard)
+  database.push(customCard)
   render()
 
 }
@@ -29,7 +29,6 @@ function addTask(indexDatabase) {
     alert("Add one column first!")
 
   }
-
   let newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
   database[indexDatabase].task.push(newEmptyTask)
   render();
@@ -80,6 +79,7 @@ function changeLabelCard(index) {
 
 }
 
+
 function saveDatabase(database) {
   localStorage.setItem('database', JSON.stringify(database))
 
@@ -104,24 +104,39 @@ function renderTask(database) {
 
       columnTask.innerHTML +=
         `
-      <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2">
-      <input type="text" class="fs-6 fw-bold border-0 rounded-0" value="${label}" onchange="changeLabelTask(${indexDatabase},${indexTask})" id="inputLabel_${indexDatabase}${indexTask}">
-      <button class="btn float-end" onclick="deleteTask(${indexDatabase},${indexTask})" ><i class="bi bi-x fs-6"></i></button>
-      <div class="description">
-        <i class="bi bi-file-earmark-text-fill small"></i>
-        <span class="text-uppercase fw-bold small">description</span>
-      </div>
-      <p class="m-0 py-1">
-        <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
-      </p>
-    </div> 
+        <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2" id="cardTask">
+        <input type="text" class="fs-6 fw-bold border-0 rounded-0" value="${label}" onchange="changeLabelTask(${indexDatabase},${indexTask})" id="inputLabel_${indexDatabase}${indexTask}">
+        <button class="btn float-end" onclick="deleteTask(${indexDatabase},${indexTask})" ><i class="bi bi-x fs-6"></i></button>
+        <div class="description">
+          <i class="bi bi-file-earmark-text-fill small"></i>
+          <span class="text-uppercase fw-bold small">description</span>
+        </div>
+        <p class="m-0 py-1">
+          <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
+        </p>
+        <div id="taskOption" class="taskOption">
+          <button class="btn" id="btnMove">
+          
+  
+          </button>
+          
+
+          <!-- Example split danger button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-danger"><i class="bi bi-shuffle"></i></button>
+  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="visually-hidden">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu" id='dropdown-menu${indexDatabase}'></ul>
+</div>
+        </div>
+      </div> 
     `
     }
     renderButtonAddTask(indexDatabase)
 
   }
 }
-
 
 function renderColumn(database) {
   saveDatabase(database)
@@ -174,3 +189,4 @@ function renderButtonAddColumn() {
     `
     
 }
+
