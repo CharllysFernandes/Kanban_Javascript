@@ -122,13 +122,15 @@ function renderTask(database) {
           
 
           <!-- Example split danger button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-danger"><i class="bi bi-shuffle"></i></button>
-  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="visually-hidden">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu" id='dropdown-menu${indexDatabase}'></ul>
-</div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-success"><i class="bi bi-shuffle"></i></button>
+          <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu" id='dropdown-menu${indexDatabase}'>
+              <li>Teste</li>
+          </ul>
+        </div>
         </div>
       </div> 
     `
@@ -187,6 +189,6 @@ function renderButtonAddColumn() {
       Add card
     </button>
     `
-    
+
 }
 
