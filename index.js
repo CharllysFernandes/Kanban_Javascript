@@ -128,6 +128,8 @@ function renderTask(database) {
             <span class="visually-hidden">Toggle Dropdown</span>
           </button>
           <ul class="dropdown-menu" id='dropdown-menu${indexDatabase}${indexTask}'>
+          
+
           </ul>
         </div>
         </div>
@@ -135,7 +137,6 @@ function renderTask(database) {
     `
   }
   renderButtonAddTask(indexDatabase)
-  // renderDropdown()
   }
 }
 
@@ -144,27 +145,15 @@ function renderDropdown() {
   for (let i = 0; i < database.length; i++) {
     for (let j = 0; j < database[i].task.length; j++) {
       console.log(i,j);
-      var dropdown = document.getElementById(`dropdowm-menu11`);
-      var dropdown = document.getElementById(`dropdown-menu${i}${j}`)
-      dropdown.innerHTML += 
-      `
-      <button class="dropdown-item" onclick="moveTaskTo()">${database[i].label}</button>
-      `
+      // // var dropdown = document.getElementById(`dropdowm-menu11`);
+      // var dropdown = document.getElementById(`dropdown-menu${i}${j}`)
+      // dropdown.innerHTML += 
+      // `
+      // <button class="dropdown-item" onclick="moveTaskTo()">${database[i].label}</button>
+      // `
     }
     
   }
-
-
-
-
-  // for (let i = 0; i < database.length; i++) {
-  //   dropdown.innerHTML += 
-  //   `
-  //   <button class="dropdown-item" onclick="moveTaskTo()">${database[i].label}</button>
-  //   `
-    
-    
-  // }
 
 
 }
