@@ -208,9 +208,14 @@ function createBtnMove() {
           console.log(id)
           dropdownMenu.innerHTML +=
           `
-          <button class="dropdown-item" onclick="moveTaskTo(${id})">${arrayList[indexDatabase]}</button>
+          <button class="dropdown-item" onclick="moveTaskTo(.this)">${arrayList[indexDatabase]}</button>
           `
       }
   }
   
+}
+
+
+function moveTaskTo(params) {
+  console.log(params)
 }
