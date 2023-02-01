@@ -204,18 +204,39 @@ function createBtnMove() {
       for (let indexTask = 0; indexTask < database[indexDatabase].task.length; indexTask++) {
           idDropMenu = "dropdown-menu"+indexDatabase+indexTask
           var dropdownMenu = document.getElementById(idDropMenu)
-          var id = `${indexDatabase}${indexTask}`
-          console.log(id)
-          dropdownMenu.innerHTML +=
-          `
-          <button class="dropdown-item" onclick="moveTaskTo(.this)">${arrayList[indexDatabase]}</button>
-          `
+
+          for (let i = 0; i < arrayList.length; i++) {
+            dropdownMenu.innerHTML +=
+            `
+            <button class="dropdown-item" onclick="moveTaskTo(innerHTML, ${indexTask})">${arrayList[i]}</button>
+            `
+            
+          }
       }
   }
   
 }
 
+/**
+ * const array1 = [5, 12, 8, 130, 44];
 
-function moveTaskTo(params) {
-  console.log(params)
+const isLargeNumber = (element) => element > 13;
+
+console.log(array1.findIndex(isLargeNumber));
+// Expected output: 3
+
+ *
+ * @param {*} params
+ */
+function moveTaskTo(params, indexDatabase) {
+
+
+
+  for (let i = 0; i < database.length; i++) {
+    if (database[i].label === params) {
+      database[indexDatabase].task.push
+    }
+    
+  }
+
 }
