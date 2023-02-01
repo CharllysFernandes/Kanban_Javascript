@@ -14,6 +14,7 @@ if (database === null) {
 function render() {
   renderColumn(database)
   renderTask(database)
+ 
 
 }
 
@@ -127,7 +128,7 @@ function renderTask(database) {
           <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="visually-hidden">Toggle Dropdown</span>
           </button>
-          <ul class="dropdown-menu" id='dropdown-menu${indexDatabase}${indexTask}'>
+          <ul class="dropdown-menu m-0" id='dropdown-menu${indexDatabase}${indexTask}'>
           
 
           </ul>
@@ -137,26 +138,10 @@ function renderTask(database) {
     `
   }
   renderButtonAddTask(indexDatabase)
-  }
+}
+createBtnMove();
 }
 
-function renderDropdown() {
-  
-  for (let i = 0; i < database.length; i++) {
-    for (let j = 0; j < database[i].task.length; j++) {
-      console.log(i,j);
-      // // var dropdown = document.getElementById(`dropdowm-menu11`);
-      // var dropdown = document.getElementById(`dropdown-menu${i}${j}`)
-      // dropdown.innerHTML += 
-      // `
-      // <button class="dropdown-item" onclick="moveTaskTo()">${database[i].label}</button>
-      // `
-    }
-    
-  }
-
-
-}
 
 function renderColumn(database) {
   saveDatabase(database)
@@ -210,3 +195,22 @@ function renderButtonAddColumn() {
 
 }
 
+function createBtnMove() {
+  let arrayList = []
+  for (let indexDatabase = 0; indexDatabase < database.length; indexDatabase++) {
+      arrayList.push(database[indexDatabase].label)
+  }
+  for (let indexDatabase = 0; indexDatabase < database.length; indexDatabase++) {
+      for (let indexTask = 0; indexTask < database[indexDatabase].task.length; indexTask++) {
+          idDropMenu = "dropdown-menu"+indexDatabase+indexTask
+          var dropdownMenu = document.getElementById(idDropMenu)
+          var id = `${indexDatabase}${indexTask}`
+          console.log(id)
+          dropdownMenu.innerHTML +=
+          `
+          <button class="dropdown-item" onclick="moveTaskTo(${id})">${arrayList[indexDatabase]}</button>
+          `
+      }
+  }
+  
+}
