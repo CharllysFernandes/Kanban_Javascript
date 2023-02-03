@@ -204,11 +204,12 @@ function createBtnMove() {
       for (let indexTask = 0; indexTask < database[indexDatabase].task.length; indexTask++) {
           idDropMenu = "dropdown-menu"+indexDatabase+indexTask
           var dropdownMenu = document.getElementById(idDropMenu)
-
+          
+          var id = `${indexDatabase}${indexTask}`
           for (let i = 0; i < arrayList.length; i++) {
             dropdownMenu.innerHTML +=
             `
-            <button class="dropdown-item" onclick="moveTaskTo(innerHTML, ${indexTask})">${arrayList[i]}</button>
+            <button class="dropdown-item" onclick="moveTaskTo(innerHTML, ${id})">${arrayList[i]}</button>
             `
             
           }
