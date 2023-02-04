@@ -15,7 +15,6 @@ function render() {
   renderColumn(database)
   renderTask(database)
  
-
 }
 
 function addCustomCard() {
@@ -105,7 +104,7 @@ function renderTask(database) {
 
       columnTask.innerHTML +=
         `
-        <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2" id="cardTask">
+        <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2" id="cardTask" draggable="true">
         <input type="text" class="fs-6 fw-bold border-0 rounded-0" value="${label}" onchange="changeLabelTask(${indexDatabase},${indexTask})" id="inputLabel_${indexDatabase}${indexTask}">
         <button class="btn float-end" onclick="deleteTask(${indexDatabase},${indexTask})" ><i class="bi bi-x fs-6"></i></button>
         <div class="description">
@@ -115,25 +114,7 @@ function renderTask(database) {
         <p class="m-0 py-1">
           <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
         </p>
-        <div id="taskOption" class="taskOption">
-          <button class="btn" id="btnMove">
-          
-  
-          </button>
-          
-
-          <!-- Example split danger button -->
-        <div class="btn-group">
-          <button type="button" class="btn btn-success"><i class="bi bi-shuffle"></i></button>
-          <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu m-0" id='dropdown-menu${indexDatabase}${indexTask}'>
-          
-
-          </ul>
-        </div>
-        </div>
+        <div id="taskOption" class="taskOption"></div>
       </div> 
     `
   }
@@ -209,35 +190,11 @@ function createBtnMove() {
           for (let i = 0; i < arrayList.length; i++) {
             dropdownMenu.innerHTML +=
             `
-            <button class="dropdown-item" onclick="moveTaskTo(innerHTML, ${id})">${arrayList[i]}</button>
+            <button class="dropdown-item" onclick="moveTaskTo(innerHTML, parentElement.append)">${arrayList[i]}</button>
             `
             
           }
       }
   }
   
-}
-
-/**
- * const array1 = [5, 12, 8, 130, 44];
-
-const isLargeNumber = (element) => element > 13;
-
-console.log(array1.findIndex(isLargeNumber));
-// Expected output: 3
-
- *
- * @param {*} params
- */
-function moveTaskTo(params, indexDatabase) {
-
-
-
-  for (let i = 0; i < database.length; i++) {
-    if (database[i].label === params) {
-      database[indexDatabase].task.push
-    }
-    
-  }
-
 }
