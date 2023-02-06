@@ -1,0 +1,61 @@
+body main {
+    height: 100vh;
+    width: max-content;
+}
+
+.customCard {
+    background-color: #f0f3fa;
+    width: 20em;
+
+}
+
+.title-column input,
+span {
+    color: #787b8c;
+
+}
+
+.title-number {
+    background-color: #dee1e8;
+}
+
+.btn-add-circle {
+    background-color: #c0d6fa;
+    width: 32px;
+    height: 32px;
+    color: #206be3;
+}
+
+.custom-card-task {
+    background-color: #fff;
+    color: #12141c;
+    cursor: grab;
+}
+
+
+.custom-card-task p {
+    color: #494c57;
+}
+
+.description {
+    color: #a5acc3;
+}
+
+.btn2 {
+    background-color: #d7dde8;
+    color: #494c57;
+
+}
+
+.taskOption {
+    margin: 4px;
+    text-align: end;
+    height: 12px;
+    width: 100%;
+    content-visibility: hidden;
+}
+
+.taskOption:hover {
+    content-visibility: visible;
+    height: 100%;
+}

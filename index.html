@@ -21,69 +21,8 @@
   <!-- Bootstrap icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-  <style>
-    body main {
-      height: 100vh;
-      width: max-content;
-    }
-
-    .customCard {
-      background-color: #f0f3fa;
-      width: 20em;
-
-    }
-
-    .title-column input,
-    span {
-      color: #787b8c;
-
-    }
-
-    .title-number {
-      background-color: #dee1e8;
-    }
-
-    .btn-add-circle {
-      background-color: #c0d6fa;
-      width: 32px;
-      height: 32px;
-      color: #206be3;
-    }
-
-    .custom-card-task {
-      background-color: #fff;
-      color: #12141c;
-      cursor: grab;
-    }
-
-
-    .custom-card-task p {
-      color: #494c57;
-    }
-
-    .description {
-      color: #a5acc3;
-    }
-
-    .btn2 {
-      background-color: #d7dde8;
-      color: #494c57;
-
-    }
-
-    .taskOption {
-      margin: 4px;
-      text-align: end;
-      height: 12px;
-      width: 100%;
-      content-visibility: hidden;
-    }
-
-    .taskOption:hover {
-      content-visibility: visible;
-      height: 100%;
-    }
-  </style>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./styles.css">
 
   <title>Kanban - Task Board</title>
 </head>
@@ -96,63 +35,10 @@
     </div>
   </nav>
   <!-- Navbar -->
-
   <main class="p-2 pt-5 mt-4">
-
     <div class="d-flex flex-row" id="dashboard"></div>
-
-    <!-- Example single danger button -->
-    <div class="btn-group">
-      <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Action
-      </button>
-      <ul class="dropdown-menu" id="dropdown-menu">
-        <li><a class="dropdown-item" id="dropdown-item" value="1" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <button class="dropdown-item m-5" onclick="moveTaskTo()">teste</button>
-      </ul>
-    </div>
-<!-- 
-    <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2" id="cardTask" draggable="true">
-      <input type="text" class="fs-6 fw-bold border-0 rounded-0" value="${label}" onchange="changeLabelTask(${indexDatabase},${indexTask})" id="inputLabel_${indexDatabase}${indexTask}">
-      <button class="btn float-end" onclick="deleteTask(${indexDatabase},${indexTask})" ><i class="bi bi-x fs-6"></i></button>
-      <div class="description">
-        <i class="bi bi-file-earmark-text-fill small"></i>
-        <span class="text-uppercase fw-bold small">description</span>
-      </div>
-      <p class="m-0 py-1">
-        <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
-      </p>
-      <div id="taskOption" class="taskOption m-0 py-1">
-        <label for="">Move to </label>
-        <select class="btn btn-success" name="optionMove" id="optionMove">
-          <option value="">Column 1</option>
-          <option value="">Column 2</option>
-          <option value="">Column 3</option>
-          <option value="">Column 4</option>
-          <option value="Column 5">Column 5</option>
-        </select>
-        <button class="btn btn-outline-success" id="btnShuffle"><i class="bi bi-shuffle"></i></button>
-      </div>
-
-    </div>  
-  -->
-
-
-
   </main>
-  <script>
-    // document.getElementById('btnShuffle').addEventListener('click', function () {
-    //   var select = document.getElementById('optionMove');
-    //   var value = select.options[select.selectedIndex].value;
-    //   console.log(value)
-    // })
-
-  </script>
+  <script src="./html.js"></script>
   <script src="./index.js"></script>
 </body>
 
