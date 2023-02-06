@@ -14,7 +14,7 @@ if (database === null) {
 function render() {
   renderColumn(database)
   renderTask(database)
- 
+
 }
 
 function addCustomCard() {
@@ -56,7 +56,6 @@ function deleteTask(indexDatabase, indexTask) {
 }
 
 function remove(index) {
-  // Add confirmation...
   if (database[index].task.length > 0) {
     if (window.confirm('Delete all saved tasks?')) {
       database.splice(index, 1)
@@ -76,6 +75,19 @@ function changeLabelCard(index) {
   let valueInput = document.getElementById(`label_${index}`).value;
   database[index].label = valueInput
   render(database)
+
+}
+
+function moveTask(indexDatabase, indexTask) {
+  var inputSelect = document.getElementById(`select-options${indexDatabase}${indexTask}`)
+  var valueSelected = inputSelect.options[inputSelect.selectedIndex].value
+  let indexFromValue = database.findIndex( i => i.label === valueSelected)
+
+  console.log(indexFromValue);
+
+  // Location value input into database
+  // push to database index
+  // render()
 
 }
 
@@ -114,13 +126,17 @@ function renderTask(database) {
         <p class="m-0 py-1">
           <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
         </p>
-        <div id="taskOption" class="taskOption"></div>
-      </div> 
+        <div id="taskOption" class="taskOption m-0 py-1 w-100">
+          <select class="btn btn-success" name="optionMove" id="select-options${indexDatabase}${indexTask}"></select>
+          <button class="btn btn-outline-success" onclick="moveTask(${indexDatabase},${indexTask})"><i class="bi bi-shuffle"></i></button>
+        </div>
+  
+      </div>  
     `
+    }
+    renderButtonAddTask(indexDatabase)
   }
-  renderButtonAddTask(indexDatabase)
-}
-createBtnMove();
+  createBtnMove();
 }
 
 
@@ -179,22 +195,22 @@ function renderButtonAddColumn() {
 function createBtnMove() {
   let arrayList = []
   for (let indexDatabase = 0; indexDatabase < database.length; indexDatabase++) {
-      arrayList.push(database[indexDatabase].label)
+    arrayList.push(database[indexDatabase].label)
   }
   for (let indexDatabase = 0; indexDatabase < database.length; indexDatabase++) {
-      for (let indexTask = 0; indexTask < database[indexDatabase].task.length; indexTask++) {
-          idDropMenu = "dropdown-menu"+indexDatabase+indexTask
-          var dropdownMenu = document.getElementById(idDropMenu)
-          
-          var id = `${indexDatabase}${indexTask}`
-          for (let i = 0; i < arrayList.length; i++) {
-            dropdownMenu.innerHTML +=
+    for (let indexTask = 0; indexTask < database[indexDatabase].task.length; indexTask++) {
+      optionMove = "select-options" + indexDatabase + indexTask
+      var selectOptionLabel = document.getElementById(optionMove)
+
+      for (let i = 0; i < arrayList.length; i++) {
+        selectOptionLabel.innerHTML +=
+          `
+          <option value="${arrayList[i]}">${arrayList[i]}</option>
+
             `
-            <button class="dropdown-item" onclick="moveTaskTo(innerHTML, parentElement.append)">${arrayList[i]}</button>
-            `
-            
-          }
+
       }
+    }
   }
-  
+
 }
