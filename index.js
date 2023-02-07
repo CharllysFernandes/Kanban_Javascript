@@ -5,7 +5,8 @@ const columnTask = (indexDatabase) => document.getElementById(`columnTask_${inde
 const iconBackupFile = (className) => document.getElementById('btnBackup').classList.add(`${className}`)
 const btnBackupFile = document.getElementById('createBackupFile')
 const btnUploadFile = document.getElementById('btnUploadFile')
-const input = document.getElementById('input')
+const file = document.getElementById('file')
+const btnUpload = document.getElementById('btnUpload')
 
 
 
@@ -29,6 +30,30 @@ if (database === null || database.length < 1) {
 
 }
 
+// Upload File
+
+btnUpload.addEventListener('click', handleSubmit)
+
+
+function handleSubmit(event) {
+  console.log('entrando no handle')
+  event.preventDefault(); // Stop the form reloading the page
+  if (!file.value.length) return; // no file nothing to do
+
+  let reader = new FileReader(); 
+
+  reader.onload = logFile;
+
+  reader.readAsText(file.files[0])
+
+}
+
+function logFile(event) {
+  database = JSON.parse(event.target.result)
+  render()
+}
+
+// End Upload File
 
 
 function buttonBackupFile() {
@@ -37,7 +62,7 @@ function buttonBackupFile() {
     btnBackupFile.addEventListener('click', () => {
       let link = document.createElement('a');
       link.href = 'data:application/octet-stream;charset=utf-8,' + JSON.stringify(database, null, 2);
-      link.download = 'KabanFileBackup';
+      link.download = 'KabanFileBackup.json';
       link.click();
     })
 
@@ -215,12 +240,7 @@ function getDatabase() {
 
 function createBackupFile() {
   let link = document.createElement('a');
-  link.href = 'data:application/octet-stream;charset=utf-8,' + JSON.stringify(database, null, 2);
+  link.href = 'data:application/octet-stream;charset=utf-8,' + JSON.stringify(localStorage.getItem('database'));
   link.download = 'KabanFileBackup';
   link.click();
-}
-
-input.onclick = () =>{
-  const selectedFile = input.files[0];
-  console.log(selectedFile);
 }
