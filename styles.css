@@ -5,7 +5,7 @@ body main {
 
 .customCard {
     background-color: #f0f3fa;
-    width: 20em;
+    min-width: 20em;
 
 }
 
@@ -58,4 +58,11 @@ span {
 .taskOption:hover {
     content-visibility: visible;
     height: 100%;
+}
+
+textarea {
+    resize: none;
+    overflow: hidden;
+    min-height: 50px;
+    max-height: auto;
 }

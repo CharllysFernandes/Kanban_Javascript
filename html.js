@@ -9,7 +9,8 @@ const renderCardTask = (label, indexDatabase, indexTask, description) =>
       <span class="text-uppercase fw-bold small">description</span>
       </div>
       <p class="m-0 py-1">
-      <input type="text" class="border-0 rounded-0 w-100 " value="${description}" onchange="changeDescripTask(${indexDatabase},${indexTask})" id="inputDescript_${indexDatabase}${indexTask}">
+        <textarea class="border-0 rounded-0 w-100" oninput="auto_grow(this)" id="inputDescript_${indexDatabase}${indexTask}" placeholder="Add description ..." onchange="changeDescripTask(${indexDatabase},${indexTask})">${description}</textarea>
+
       </p>
       <div id="taskOption" class="taskOption m-0 py-1 w-100">
       <select class="btn btn-success" name="optionMove" id="select-options${indexDatabase}${indexTask}"></select>

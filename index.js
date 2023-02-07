@@ -2,6 +2,7 @@ const getInputLabelTask = (indexDatabase, indexTask) => document.getElementById(
 const inputDescript = (indexDatabase, indexTask) => document.getElementById(`inputDescript_${indexDatabase}${indexTask}`).value;
 const getInputLabelCard = (index) => document.getElementById(`label_${index}`).value;
 const columnTask = (indexDatabase) => document.getElementById(`columnTask_${indexDatabase}`)
+const iconBackupFile = (className) => document.getElementById('btnBackup').classList.add(`${className}`)
 
 const customCard = { label: 'Unspecified stage', task: [] }
 const newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
@@ -13,11 +14,20 @@ database = getDatabase();
 
 if (database === null) {
   database = []
+  iconBackupFile('bi-cloud-arrow-down');
+  renderButtonAddColumn()
 
 } else {
   render()
 
 }
+
+// teste
+function auto_grow(element) {
+  element.style.height = "5px";
+  element.style.height = (element.scrollHeight)+"px";
+}
+
 
 function render() {
   renderColumn(database)
@@ -164,4 +174,11 @@ function saveDatabase(database) {
 function getDatabase() {
   return JSON.parse(localStorage.getItem('database'))
 
+}
+
+function createBackupFile() {
+  let link = document.createElement('a');
+  link.href = 'data:application/octet-stream;charset=utf-8,' + JSON.stringify(database, null, 2);
+  link.download = 'KabanFileBackup';
+  link.click();
 }
