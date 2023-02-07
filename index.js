@@ -3,8 +3,13 @@ const inputDescript = (indexDatabase, indexTask) => document.getElementById(`inp
 const getInputLabelCard = (index) => document.getElementById(`label_${index}`).value;
 const columnTask = (indexDatabase) => document.getElementById(`columnTask_${indexDatabase}`)
 const iconBackupFile = (className) => document.getElementById('btnBackup').classList.add(`${className}`)
+const btnBackupFile = document.getElementById('createBackupFile')
+const btnUploadFile = document.getElementById('btnUploadFile')
+const input = document.getElementById('input')
 
-const customCard = { label: 'Unspecified stage', task: [] }
+
+
+const customCard = { label: 'Unspecified stage ', task: [] }
 const newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
 
 const dashboard = document.getElementById('dashboard');
@@ -12,34 +17,68 @@ let database = new Array()
 
 database = getDatabase();
 
-if (database === null) {
+if (database === null || database.length < 1) {
+  var statusDatabase = false;
   database = []
-  iconBackupFile('bi-cloud-arrow-down');
   renderButtonAddColumn()
+  buttonBackupFile()
 
 } else {
+  var statusDatabase = true
   render()
 
 }
 
-// teste
+
+
+function buttonBackupFile() {
+  if (statusDatabase) {
+    iconBackupFile('bi-cloud-arrow-down');
+    btnBackupFile.addEventListener('click', () => {
+      let link = document.createElement('a');
+      link.href = 'data:application/octet-stream;charset=utf-8,' + JSON.stringify(database, null, 2);
+      link.download = 'KabanFileBackup';
+      link.click();
+    })
+
+
+  } else {
+    iconBackupFile('bi-cloud-arrow-up');
+    btnBackupFile.setAttribute('data-bs-toggle', 'modal')
+    btnBackupFile.setAttribute('data-bs-target', '#exampleModal')
+    btnBackupFile.addEventListener('click', () => {
+      document.getElementById('modal').classList.add('d-block')
+    })
+
+
+  }
+}
+
 function auto_grow(element) {
   element.style.height = "5px";
-  element.style.height = (element.scrollHeight)+"px";
+  element.style.height = (element.scrollHeight) + "px";
 }
 
 
 function render() {
   renderColumn(database)
   renderTask(database)
+  buttonBackupFile()
 
 }
 
 function addCustomCard() {
-  database.push(customCard)
-  render()
+  if (statusDatabase) {
+    database.push(customCard)
+    let lastIndex = database.length - 1
+    database[lastIndex].label += lastIndex
+    render() 
+  } else {
+    database.push(customCard)
+    render()
+    
+  }
   window.location.reload()
-
 }
 
 function addTask(indexDatabase) {
@@ -74,16 +113,14 @@ function remove(index) {
   if (database[index].task.length > 0) {
     if (window.confirm('Delete all saved tasks?')) {
       database.splice(index, 1)
-      render()
-
     }
 
   } else {
     database.splice(index, 1)
-    render()
 
   }
-
+  render()
+  window.location.reload()
 }
 
 function changeLabelCard(index) {
@@ -181,4 +218,9 @@ function createBackupFile() {
   link.href = 'data:application/octet-stream;charset=utf-8,' + JSON.stringify(database, null, 2);
   link.download = 'KabanFileBackup';
   link.click();
+}
+
+input.onclick = () =>{
+  const selectedFile = input.files[0];
+  console.log(selectedFile);
 }
