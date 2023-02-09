@@ -8,10 +8,9 @@ const btnUploadFile = document.getElementById('btnUploadFile')
 const file = document.getElementById('file')
 const btnUpload = document.getElementById('btnUpload')
 
-
-
-const customCard = { label: 'Unspecified stage ', task: [] }
-const newEmptyTask = { label: "New empty task", description: 'One simple description ...' }
+const customCard = { label: 'Unspecified_stage ', task: [] }
+const newEmptyTask = { label: "New_empty_task", description: 'One_simple_description...' }
+let textconvert = (text) => text.replace(" ", "_")
 
 const dashboard = document.getElementById('dashboard');
 let database = new Array()
@@ -118,6 +117,7 @@ function addTask(indexDatabase) {
 
 function changeLabelTask(indexDatabase, indexTask) {
   database[indexDatabase].task[indexTask].label = getInputLabelTask(indexDatabase, indexTask)
+  document.location.reload()
   render()
 
 }
@@ -236,11 +236,4 @@ function saveDatabase(database) {
 function getDatabase() {
   return JSON.parse(localStorage.getItem('database'))
 
-}
-
-function createBackupFile() {
-  let link = document.createElement('a');
-  link.href = 'data:application/octet-stream;charset=utf-8,' + JSON.stringify(localStorage.getItem('database'));
-  link.download = 'KabanFileBackup';
-  link.click();
 }

@@ -1,15 +1,16 @@
-const optionList = (indexArrayList) => `<option value="${indexArrayList}">${indexArrayList}</option>`
+const optionList = (indexArrayList) => `<option value="${indexArrayList}">${text(indexArrayList)}</option>`
 const renderCardTask = (label, indexDatabase, indexTask, description) =>
+
     `
 <div class="p-2 custom-card-task rounded rounded-3 shadow-sm my-2" id="cardTask" draggable="true">
-      <input type="text" class="fs-6 fw-bold border-0 rounded-0" value="${label}" onchange="changeLabelTask(${indexDatabase},${indexTask})" id="inputLabel_${indexDatabase}${indexTask}">
+      <input type="text" class="fs-6 fw-bold border-0 rounded-0" value="${text(label)}" onchange="changeLabelTask(${indexDatabase},${indexTask})" id="inputLabel_${indexDatabase}${indexTask}">
       <button class="btn float-end" onclick="deleteTask(${indexDatabase},${indexTask})" ><i class="bi bi-x fs-6"></i></button>
       <div class="description">
       <i class="bi bi-file-earmark-text-fill small"></i>
       <span class="text-uppercase fw-bold small">description</span>
       </div>
       <p class="m-0 py-1">
-        <textarea class="border-0 rounded-0 w-100" oninput="auto_grow(this)" id="inputDescript_${indexDatabase}${indexTask}" placeholder="Add description ..." onchange="changeDescripTask(${indexDatabase},${indexTask})">${description}</textarea>
+        <textarea class="border-0 rounded-0 w-100" oninput="auto_grow(this)" id="inputDescript_${indexDatabase}${indexTask}" placeholder="Add description ..." onchange="changeDescripTask(${indexDatabase},${indexTask})">${text(description)}</textarea>
 
       </p>
       <div id="taskOption" class="taskOption m-0 py-1 w-100">
@@ -25,7 +26,7 @@ const renderCardColumn = (index, numberOfTask, title) =>
 <div class="rounded rounded-3 customCard p-3 me-4 h-100" id="customCard_${index}">
     <div class="d-flex flex-row justify-content-between align-items-center">
     <div class="title-column">
-    <input type="text" class="border-0 bg-transparent" onchange="changeLabelCard(${index})" id='label_${index}' value="${title}">
+    <input type="text" class="border-0 bg-transparent" onchange="changeLabelCard(${index})" id='label_${index}' value="${text(title)}">
     <span class="title-number rounded rounded-2 p-1">
     ${numberOfTask}
     </span>
@@ -50,3 +51,5 @@ const buttonCard = () =>
   Add card
   </button>
 `
+
+const text = (text) => text.replaceAll("_", " ") 
