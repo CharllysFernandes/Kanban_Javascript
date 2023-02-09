@@ -10,7 +10,7 @@ const btnUpload = document.getElementById('btnUpload')
 
 const customCard = { label: 'Unspecified_stage ', task: [] }
 const newEmptyTask = { label: "New_empty_task", description: 'One_simple_description...' }
-let textconvert = (text) => text.replace(" ", "_")
+let textconvert = (text) => text.replaceAll(" ", "_")
 
 const dashboard = document.getElementById('dashboard');
 let database = new Array()
@@ -35,7 +35,6 @@ btnUpload.addEventListener('click', handleSubmit)
 
 
 function handleSubmit(event) {
-  console.log('entrando no handle')
   event.preventDefault(); // Stop the form reloading the page
   if (!file.value.length) return; // no file nothing to do
 
@@ -44,7 +43,7 @@ function handleSubmit(event) {
   reader.onload = logFile;
 
   reader.readAsText(file.files[0])
-
+  window.location.reload()
 }
 
 function logFile(event) {
@@ -88,7 +87,6 @@ function render() {
   renderColumn(database)
   renderTask(database)
   buttonBackupFile()
-
 }
 
 function addCustomCard() {
@@ -112,25 +110,30 @@ function addTask(indexDatabase) {
   }
   database[indexDatabase].task.push(newEmptyTask)
   render();
+  window.location.reload()
 
 }
 
 function changeLabelTask(indexDatabase, indexTask) {
-  database[indexDatabase].task[indexTask].label = getInputLabelTask(indexDatabase, indexTask)
-  document.location.reload()
+  let getText = textconvert(getInputLabelTask(indexDatabase, indexTask))
+  console.log(getText)
+  database[indexDatabase].task[indexTask].label = textconvert(getInputLabelTask(indexDatabase, indexTask))
   render()
+  // window.location.reload()
 
 }
 
 function changeDescripTask(indexDatabase, indexTask) {
-  database[indexDatabase].task[indexTask].description = inputDescript(indexDatabase, indexTask)
+  database[indexDatabase].task[indexTask].description = textconvert(inputDescript(indexDatabase, indexTask))
   render()
+  // window.location.reload()
 
 }
 
 function deleteTask(indexDatabase, indexTask) {
   database[indexDatabase].task.splice(indexTask, 1);
   render()
+  window.location.reload()
 
 }
 
@@ -149,8 +152,9 @@ function remove(index) {
 }
 
 function changeLabelCard(index) {
-  database[index].label = getInputLabelCard(index)
+  database[index].label = textconvert(getInputLabelCard(index))
   render(database)
+  window.location.reload()
 
 }
 
