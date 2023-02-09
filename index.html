@@ -27,18 +27,18 @@
   <title>Kanban - Task Board</title>
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid bg-dark">
   <!-- Navbar -->
-  <nav class="navbar bg-body-tertiary fixed-top">
+  <nav class="navbar bg-black fixed-top shadow">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Task Board</a>
-      <button class="btn p-0 m-0" id="createBackupFile" ><i
-          id='btnBackup' class="bi fs-3"></i></button>
+      <a class="navbar-brand text-white" href="#">Task Board</a>
+      <button class="btn p-0 m-0" id="createBackupFile"><i id='btnBackup' class="bi fs-3 text-white"></i></button>
     </div>
   </nav>
   <!-- Navbar -->
   <main class="p-2 pt-5 mt-4">
     <div class="d-flex flex-row" id="dashboard"></div>
+
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -47,11 +47,10 @@
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <input class="form-control" type="file" id="file" 
-              >
-              <!-- accept=".json" -->
+              <input class="form-control" type="file" id="file" accept=".json">
             </div>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="btnUpload">Upload JSON file</button>

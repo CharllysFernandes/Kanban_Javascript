@@ -23,7 +23,7 @@ const renderCardTask = (label, indexDatabase, indexTask, description) =>
 
 const renderCardColumn = (index, numberOfTask, title) =>
     `
-<div class="rounded rounded-3 customCard p-3 me-4 h-100" id="customCard_${index}">
+<div class="bg-black50 rounded rounded-3 customCard p-3 me-4 h-100" id="customCard_${index}">
     <div class="d-flex flex-row justify-content-between align-items-center">
     <div class="title-column">
     <input type="text" class="border-0 bg-transparent" onchange="changeLabelCard(${index})" id='label_${index}' value="${text(title)}">
